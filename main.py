@@ -5,8 +5,8 @@ from pygame.locals import *
 
 if __name__ == '__main__':
 
-    WINDOW = pygame.Rect(0, 0, 200, 200)
-    Ball = pygame.Rect(0, 0, 10, 10)
+    WINDOW = pygame.Rect(0, 0, 500, 300)
+    Ball = pygame.Rect(0, 0, 10, 10)    # Ball object's height and width have to same value.
     speed = [1, 2]
     FPS = 60
 
@@ -30,18 +30,15 @@ if __name__ == '__main__':
                 (circle_center[1] + circle_radius) > WINDOW.bottom:
             speed[1] = -speed[1]
 
-    def update():
-        global Ball
-        Ball.centerx += speed[0]
-        Ball.centery += speed[1]
 
     # main loop
     running = True
     while running:
         clock.tick(FPS)
 
+        # update object's vector of speed
         collide_handlings(Ball.center, Ball.height//2, WINDOW)
-        update()
+        Ball.move_ip(speed)
 
         screen.fill((0, 0, 0))
         pygame.draw.circle(screen, (255, 0, 0), Ball.center, Ball.height//2)
